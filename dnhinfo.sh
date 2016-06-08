@@ -1,6 +1,6 @@
-echo "OS"
+echo -e "\nOS"
 lsb_release -a
-echo "Memory"
+echo -e "\nMemory"
 cat /proc/meminfo
-echo "CPU"
+echo -e "\nCPU"
 lscpu
