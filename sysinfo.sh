@@ -42,6 +42,9 @@ RAM_TYPES=`sudo dmidecode -t memory | grep "Part" | tr -d " " | cut -d ":" -f 2 
 RAM_BUILTIN_SPEED=`sudo dmidecode -t memory | grep Speed | grep -v Config | tr -d ' ' | cut -d ':' -f 2 | tr -s '\n' '\t'`
 RAM_CONFIGURED_SPEED=`sudo dmidecode -t memory | grep Speed | grep Config | tr -d ' ' | cut -d ':' -f 2 | tr -s '\n' '\t'`
 COMPUTER_PORTS=`sudo dmidecode -t connector | grep "External Reference Designator" | cut -d ":" -f 2 | cut -b 2- | tr -s '\n' ';'`
+KERNEL_VERSION=`uname -rp`
+DISTRIBUTION_VERSION=`cat /etc/lsb-release | grep DESCRIPTION | cut -d "=" -f 2 | tr -d '"'`
+
 echo "----------- BIOS --------------"
 echo "BIOS vendor  : $BIOS_VENDOR"
 echo "BIOS version : $BIOS_VERSION"
@@ -88,6 +91,8 @@ echo "$PARTITION_INFO"
 echo "---------- USB ---------------"
 echo "$USB_DEVICES"
 echo "---------- MISC -------"
+echo "Kernel        : $KERNEL_VERSION"
+echo "Distribution  : $DISTRIBUTION_VERSION"
 echo "Graphic       : $GRAPHIC_CARD"
 echo "Network       : $NETWORK_CARDS"
 echo "Ports         : $COMPUTER_PORTS"
