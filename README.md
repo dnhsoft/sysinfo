@@ -6,5 +6,5 @@ curl -s https://raw.githubusercontent.com/dnhsoft/sysinfo/master/sysinfo.sh | su
 
 Caution: You need ACPI tools installed 
 ```bash
-sudo apt-get install acpib
+sudo apt-get install acpi
 ```
