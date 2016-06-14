@@ -41,7 +41,8 @@ RAM_SERIAL_NUMBERS=`sudo dmidecode -t memory | grep "Serial" | tr -d " " | cut -
 RAM_TYPES=`sudo dmidecode -t memory | grep "Part" | tr -d " " | cut -d ":" -f 2 | tr -s '\n' '\t'`
 RAM_BUILTIN_SPEED=`sudo dmidecode -t memory | grep Speed | grep -v Config | tr -d ' ' | cut -d ':' -f 2 | tr -s '\n' '\t'`
 RAM_CONFIGURED_SPEED=`sudo dmidecode -t memory | grep Speed | grep Config | tr -d ' ' | cut -d ':' -f 2 | tr -s '\n' '\t'`
-COMPUTER_PORTS=`sudo dmidecode -t connector | grep "External Reference Designator" | cut -d ":" -f 2 | cut -b 2- | tr -s '\n' ';'`
+COMPUTER_PORTS_INTERNAL=`sudo dmidecode -t connector | grep "Internal Reference Designator" | grep -v Not | cut -d ":" -f 2 | cut -b 2- | tr -s '\n' ';'`
+COMPUTER_PORTS_EXTERNAL=`sudo dmidecode -t connector | grep "External Reference Designator" | grep -v Not | cut -d ":" -f 2 | cut -b 2- | tr -s '\n' ';'`
 KERNEL_VERSION=`uname -rp`
 DISTRIBUTION_VERSION=`cat /etc/lsb-release | grep DESCRIPTION | cut -d "=" -f 2 | tr -d '"'`
 
@@ -95,6 +96,5 @@ echo "Kernel        : $KERNEL_VERSION"
 echo "Distribution  : $DISTRIBUTION_VERSION"
 echo "Graphic       : $GRAPHIC_CARD"
 echo "Network       : $NETWORK_CARDS"
-echo "Ports         : $COMPUTER_PORTS"
-
-
+echo "Internal ports: $COMPUTER_PORTS_INTERNAL"
+echo "External ports: $COMPUTER_PORTS_EXTERNAL"
