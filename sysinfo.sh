@@ -45,6 +45,7 @@ COMPUTER_PORTS_INTERNAL=`sudo dmidecode -t connector | grep "Internal Reference 
 COMPUTER_PORTS_EXTERNAL=`sudo dmidecode -t connector | grep "External Reference Designator" | grep -v Not | cut -d ":" -f 2 | cut -b 2- | tr -s '\n' ';'`
 KERNEL_VERSION=`uname -rp`
 DISTRIBUTION_VERSION=`cat /etc/lsb-release | grep DESCRIPTION | cut -d "=" -f 2 | tr -d '"'`
+STORAGE_INFO=$(smartctl --scan | sudo smartctl -i `cut -d' ' -f 1`)
 
 echo "----------- BIOS --------------"
 echo "BIOS vendor  : $BIOS_VENDOR"
@@ -85,6 +86,8 @@ echo "RAM speed     : $RAM_BUILTIN_SPEED"
 echo "RAM conf speed: $RAM_CONFIGURED_SPEED"
 echo "RAM serials   : $RAM_SERIAL_NUMBERS"
 echo "RAM parts     : $RAM_TYPES"
+echo "---------- STORAGE -----------"
+echo "$STORAGE_INFO"
 echo "---------- BATTERY -----------"
 echo "Battery info     : $BATTERY_INFO"
 echo "---------- PARTITIONS --------"
